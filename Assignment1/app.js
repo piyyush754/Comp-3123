@@ -1,12 +1,10 @@
-// app.js
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config(); // Load environment variables only in development
+}
 
-require('dotenv').config(); // Load environment variables
 const express = require('express');
 const app = express();
 const connectDB = require('./config/db');
-
-// Connect to MongoDB Atlas
-connectDB();
 
 // Middleware to parse JSON
 app.use(express.json());
@@ -26,9 +24,16 @@ app.use((req, res) => {
   });
 });
 
-// Start the Server
+// Start the Server after successful DB connection
 const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+connectDB()
+  .then(() => {
+    app.listen(PORT, () => {
+      console.log(`Server is running on port ${PORT}`);
+    });
+  })
+  .catch((err) => {
+    console.error('MongoDB connection error:', err.message);
+    process.exit(1); // Exit process with failure
+  });

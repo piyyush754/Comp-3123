@@ -1,5 +1,3 @@
-// controllers/empController.js
-
 const { validationResult } = require('express-validator');
 const Employee = require('../models/empModel');
 

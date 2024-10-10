@@ -1,5 +1,3 @@
-// routes/empRoutes.js
-
 const express = require('express');
 const router = express.Router();
 const { check } = require('express-validator');
@@ -33,7 +31,6 @@ router.put(
     // Optional validation for updatable fields
     check('position', 'Position must be a string').optional().isString(),
     check('salary', 'Salary must be a number').optional().isNumeric(),
-    // Add other fields as necessary
   ],
   empController.updateEmployee
 );
