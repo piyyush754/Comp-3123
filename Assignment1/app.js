@@ -12,6 +12,7 @@ app.use(express.json());
 // Routes
 const userRoutes = require('./routes/userRoutes');
 const empRoutes = require('./routes/empRoutes');
+const { default: mongoose } = require('mongoose');
 
 app.use('/api/v1/user', userRoutes);
 app.use('/api/v1/emp', empRoutes);
@@ -26,6 +27,7 @@ app.use((req, res) => {
 
 // Start the Server after successful DB connection
 const PORT = process.env.PORT || 3000;
+
 
 connectDB()
   .then(() => {
