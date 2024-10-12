@@ -3,6 +3,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 const express = require('express');
+const serverless = require('serverless-http'); // Import serverless-http
 const app = express();
 const connectDB = require('./config/db');
 
@@ -28,8 +29,8 @@ app.use((req, res) => {
 // // Start the Server after successful DB connection
 // const PORT = process.env.PORT || 3000;
 
-// Export the Express app wrapped with serverless-http
-const handler = serverless(app);
+// // Export the Express app wrapped with serverless-http
+// const handler = serverless(app);
 
 connectDB()
   .then(() => {
