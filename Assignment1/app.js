@@ -43,4 +43,5 @@ connectDB()
   });
 
 
-module.exports = handler;
+// Export the handler wrapped with serverless-http
+module.exports.handler = serverless(app);
