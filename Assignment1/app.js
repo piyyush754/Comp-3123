@@ -26,8 +26,8 @@ app.use((req, res) => {
   });
 });
 
-// // Start the Server after successful DB connection
-// const PORT = process.env.PORT || 3000;
+// Start the Server after successful DB connection
+const PORT = process.env.PORT || 3000;
 
 // // Export the Express app wrapped with serverless-http
 // const handler = serverless(app);
