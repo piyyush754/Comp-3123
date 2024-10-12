@@ -12,6 +12,7 @@
         "src": "/(.*)",
         "dest": "/app.js"
       }
-    ]
+    ],
+    "root": "assignment1"
   }
   
