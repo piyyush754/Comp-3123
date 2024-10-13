@@ -1,46 +1,28 @@
-// Load environment variables in development
-if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').config();
-}
-
 const express = require('express');
+// const bodyParser = require('body-parser');
 const app = express();
-const connectDB = require('./config/db');
+const mongoose = require('mongoose');
+const user = require('./models/userModel');
+const employee= require('./models/empModel');
 
-// Middleware to parse JSON
-app.use(express.json());
+app.use(express.json()); 
+// TODO - Update your mongoDB Atals Url here to Connect to the database
+mongoose
+  .connect(
+    "mongodb+srv://dbUser:userPassword@comp3123assign1.edlc7.mongodb.net/comp3123Assign1?retryWrites=true&w=majority&appName=comp3123Assign1"
+  )
+  .then(() => console.log("MongoDB connected"))
+  .catch((err) => console.error("Error connecting to MongoDB:", err.message));
 
-// Routes
-app.get("/", (req, res) => {
-  res.send("<h1>Welcome</h1>")
-})
-const userRoutes = require('./routes/userRoutes');
-const empRoutes = require('./routes/empRoutes');
+app.use("/api/v1/user", user); // Change 'userRoutes' to 'userRouter'
 
-app.use('/api/v1/user', userRoutes);
-app.use('/api/v1/emp', empRoutes);
+app.use("/api/v1/emp", employee); // Define employee-related API routes
 
-// Handle undefined routes
-app.use((req, res) => {
-  res.status(404).json({ 
-    status: false, 
-    message: 'Route not found.' 
-  });
+app.get('/', (req, res) => {
+    res.send("<h1>Welcome to Assignment 1</h1>");
 });
 
-// Connect to the database
-connectDB()
-  .then(() => {
-    console.log('MongoDB connected');
-    // Start the server only if running locally
-    if (require.main === module) {
-      const PORT = process.env.PORT || 3000;
-      app.listen(PORT, () => {
-        console.log(`Server is running on port ${PORT}`);
-      });
-    }
-  })
-  .catch((err) => {
-    console.error('MongoDB connection error:', err.message);
-    process.exit(1); // Exit process with failure
-  });
+
+app.listen(3000, () => {
+    console.log("Server is listening on port 3000");
+});
