@@ -11,6 +11,9 @@ const connectDB = require('./config/db');
 app.use(express.json());
 
 // Routes
+app.get("/", (req, res) => {
+  res.send("<h1>Welcome</h1>")
+})
 const userRoutes = require('./routes/userRoutes');
 const empRoutes = require('./routes/empRoutes');
 
