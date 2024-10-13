@@ -4,7 +4,6 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 const express = require('express');
-const serverless = require('serverless-http'); // Import serverless-http
 const app = express();
 const connectDB = require('./config/db');
 
@@ -42,6 +41,3 @@ connectDB()
     console.error('MongoDB connection error:', err.message);
     process.exit(1); // Exit process with failure
   });
-
-// Export the handler wrapped with serverless-http
-module.exports.handler = serverless(app);
