@@ -30,7 +30,13 @@ app.use((req, res) => {
 connectDB()
   .then(() => {
     console.log('MongoDB connected');
-    // No app.listen() here
+    // Start the server only if running locally
+    if (require.main === module) {
+      const PORT = process.env.PORT || 3000;
+      app.listen(PORT, () => {
+        console.log(`Server is running on port ${PORT}`);
+      });
+    }
   })
   .catch((err) => {
     console.error('MongoDB connection error:', err.message);
