@@ -1,5 +1,3 @@
-// app.js
-
 // Import Dependencies
 const express = require('express');
 const mongoose = require('mongoose');
@@ -16,7 +14,7 @@ app.use(express.json());
 
 // Routes
 app.get("/", (req, res) => {
-  res.send("<h1>Welcome</h1>");
+  res.send("<h1>Welcome to Assignment 1</h1>");
 });
 
 const userRoutes = require('./routes/userRoutes');
