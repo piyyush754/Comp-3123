@@ -7,8 +7,7 @@ const employee= require('./models/empModel');
 
 app.use(express.json()); 
 // TODO - Update your mongoDB Atals Url here to Connect to the database
-mongoose
-  .connect(
+mongoose.connect(
     "mongodb+srv://dbUser:userPassword@comp3123assign1.edlc7.mongodb.net/comp3123Assign1?retryWrites=true&w=majority&appName=comp3123Assign1"
   )
   .then(() => console.log("MongoDB connected"))
